@@ -6,7 +6,7 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
-var registrationToken = "fVyPIlyLRAu-vyItlxHEAV:APA91bE1-72_bqmZhWmeluwBajTH6k3up4FfiyXFx0bta_73vak3VJf17iAnSSFrljDjhPo--UKVsPtI4ViUIB2j9PWohZZ_xD-u-BD_vjrkmV5Ifeptnla3P8OrQREqxmCyPOe3W18L";
+var registrationToken = "Your Token";
 
 
 
