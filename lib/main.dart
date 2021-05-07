@@ -6,6 +6,19 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print("Handling a background message ${message.messageId}");
+
+  flutterLocalNotificationsPlugin.show(
+      message.notification.hashCode,
+      message.notification.title,
+      message.notification.body,
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          channel.id,
+          channel.name,
+          channel.description,
+          icon: 'launch_background',
+        ),
+      ));
 }
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -42,6 +55,13 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
+    var androidInitialization =
+        AndroidInitializationSettings('launch_background');
+    var iosInitialization = IOSInitializationSettings();
+    var initializationSetting = InitializationSettings(
+        android: androidInitialization, iOS: iosInitialization);
+
+    flutterLocalNotificationsPlugin.initialize(initializationSetting);
     // Listen When app on foreground state
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification notification = message.notification;
