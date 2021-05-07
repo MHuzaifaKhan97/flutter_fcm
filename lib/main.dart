@@ -6,11 +6,14 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print("Handling a background message ${message.messageId}");
-
+  print(message.data);
   flutterLocalNotificationsPlugin.show(
-      message.notification.hashCode,
-      message.notification.title,
-      message.notification.body,
+      // message.notification.hashCode,
+      // message.notification.title,
+      // message.notification.body,
+      message.data.hashCode,
+      message.data['title'],
+      message.data['body'],
       NotificationDetails(
         android: AndroidNotificationDetails(
           channel.id,
